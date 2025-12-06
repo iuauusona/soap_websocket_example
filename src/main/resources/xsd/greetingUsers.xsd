@@ -1,6 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:tns="http://kg.isagulova/soapwebsocketproject/api/greeting"
-           targetNamespace="http://kg.isagulova/soapwebsocketproject/api/greeting"
+           xmlns:tns="http://isagulova.kg/soapwebsocketproject/api/greeting"
+           targetNamespace="http://isagulova.kg/soapwebsocketproject/api/greeting"
            elementFormDefault="qualified">
     <xs:element name="getGreetingRequest">
         <xs:complexType>
@@ -21,7 +21,7 @@
     <xs:complexType name="greeting">
         <xs:sequence>
             <xs:element name="text" type="xs:string"/>
-            <xs:element name="date" type="xs:date"/>
+            <xs:element name="date" type="xs:dateTime"/>
         </xs:sequence>
     </xs:complexType>
 

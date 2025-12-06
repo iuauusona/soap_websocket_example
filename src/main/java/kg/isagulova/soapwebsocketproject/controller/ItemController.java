@@ -21,7 +21,7 @@ public class ItemController {
     }
     @PutMapping
     public ResponseEntity<Void> addItem(@RequestBody String body) {
-        if(body == null && body.trim().isEmpty()) {
+        if(body == null && !body.trim().isEmpty()) {
             Item item = new Item(body);
             itemService.addItem(item);
             sendNotification(item);

@@ -1,6 +1,6 @@
 package kg.isagulova.soapwebsocketproject.service;
 
-import kg.isagulova.soapwebsocketproject.api.Greeting;
+import kg.isagulova.soapwebsocketproject.api.greeting.Greeting;
 import org.springframework.stereotype.Component;
 
 import javax.xml.datatype.DatatypeConfigurationException;

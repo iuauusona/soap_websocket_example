@@ -1,7 +1,7 @@
 package kg.isagulova.soapwebsocketproject.endpoint;
 
-import kg.isagulova.soapwebsocketproject.api.GetGreetingRequest;
-import kg.isagulova.soapwebsocketproject.api.GetGreetingResponse;
+import kg.isagulova.soapwebsocketproject.api.greeting.GetGreetingRequest;
+import kg.isagulova.soapwebsocketproject.api.greeting.GetGreetingResponse;
 import kg.isagulova.soapwebsocketproject.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;

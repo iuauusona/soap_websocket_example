@@ -1,27 +1,112 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-  ...
-  <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-  <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <meta charset="UTF-8">
+    <title>WebSocket Demo</title>
 
-  <script src="/webjars/jquery/jquery.min.js"></script>
-  <script src="/app.js"></script>
+    <!-- CDN для jQuery, SockJS и STOMP -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+
+    <script>
+        var stomp = null;
+
+        // подключаемся к серверу после загрузки страницы
+        window.onload = function() {
+            connect();
+        };
+
+        function connect() {
+            var socket = new SockJS('/socket');
+            stomp = Stomp.over(socket);
+
+            stomp.connect({}, function(frame) {
+                console.log('Connected: ' + frame);
+
+                // подписка на топик
+                stomp.subscribe('/topic/items', function(item) {
+                    renderItem(JSON.parse(item.body).content);
+                });
+            });
+        }
+
+        // отправка сообщения на сервер
+        function sendContent() {
+            var content = $("#content").val();
+            if (content && content.trim() !== "") {
+                stomp.send("/app/item", {}, JSON.stringify({ 'content': content }));
+                $("#content").val(''); // очистка поля
+            }
+        }
+
+        // рендер полученного сообщения
+        function renderItem(text) {
+            $("#list").append("<li style='color: red'>" + text + "</li>");
+        }
+
+        // jQuery-хук на форму
+        $(function () {
+            $("form").on('submit', function(e) {
+                e.preventDefault();
+            });
+
+            $("#send").click(function() {
+                sendContent();
+            });
+        });
+    </script>
 </head>
 <body>
 <div id="comments">
-  <h3>Comments</h3>
-  <ul id="list">
-    <li th:each="item : ${items}"><span th:text="${item.content}">comment</span></li>
-  </ul>
+    <h3>Comments</h3>
+    <ul id="list">
+        <!-- Thymeleaf items -->
+        <li th:each="item : ${items}" th:text="${item.content}">comment</li>
+    </ul>
 </div>
 
 <div id="whatsup">
-  <form>
-    <label for="content">What's up?</label>
-    <input type="text" id="content" placeholder="type news here...">
-    <button id="send" type="submit">Submit</button>
-  </form>
+    <form>
+        <label for="content">What's up?</label>
+        <input type="text" id="content" placeholder="type news here...">
+        <button id="send" type="submit">Submit</button>
+    </form>
 </div>
 </body>
 </html>
+<!--<!DOCTYPE html>-->
+
+
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <title>Web Socket Page Demo</title>-->
+<!--  ...-->
+<!--&lt;!&ndash;  <script src="/webjars/sockjs-client/sockjs.min.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;  <script src="/webjars/stomp-websocket/stomp.min.js"></script>&ndash;&gt;-->
+
+<!--    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.5/lib/stomp.min.js"></script>-->
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+
+
+<!--    &lt;!&ndash;    <script src="/webjars/jquery/jquery.min.js"></script>&ndash;&gt;-->
+<!--  <script src="/app.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="comments">-->
+<!--  <h3>Comments</h3>-->
+<!--  <ul id="list">-->
+<!--    <li th:each="item : ${items}"><span th:text="${item.content}">comment</span></li>-->
+<!--  </ul>-->
+<!--</div>-->
+
+<!--<div id="whatsup">-->
+<!--  <form>-->
+<!--    <label for="content">What's up?</label>-->
+<!--    <input type="text" id="content" placeholder="type news here...">-->
+<!--    <button id="send" type="submit">Submit</button>-->
+<!--  </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
