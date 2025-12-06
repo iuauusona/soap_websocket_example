@@ -106,7 +106,7 @@
 					<outputDirectory>
 						${project.basedir}/src/main/java
 					</outputDirectory>
-					<packageName>kg.isagulova.soapwebsocketproject</packageName>
+					<packageName>kg.isagulova.soapwebsocketproject.api</packageName>
 					<clearOutputDir>false</clearOutputDir>
 				</configuration>
 			</plugin>
