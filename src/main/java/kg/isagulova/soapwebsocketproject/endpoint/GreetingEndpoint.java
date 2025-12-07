@@ -14,7 +14,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 @Endpoint
 public class GreetingEndpoint {
 
-    private static final String NAMESPACE_URI = "http://kg.isagulova/soapwebsocketproject/api/greeting";
+    private static final String NAMESPACE_URI = "http://isagulova.kg/soapwebsocketproject/api/greeting";
     private final GreetingService greetingService;
 
     @Autowired

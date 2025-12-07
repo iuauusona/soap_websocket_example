@@ -29,7 +29,7 @@ public class WebServiceConfig {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("GreetingPort");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://kg.isagulova/soapwebsocketproject/api/greeting"); // не имеет значения
+        wsdl11Definition.setTargetNamespace("http://isagulova.kg/soapwebsocketproject/api/greeting"); // не имеет значения
         wsdl11Definition.setSchema(xsdSchema);
         return wsdl11Definition;
     }
